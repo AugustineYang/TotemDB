@@ -35,8 +35,8 @@ public class TrajectoryUtils {
     // 初始化两张轨迹表
     public void init(){
         try{
-            String sql1 = "CREATE IF NOT EXIST CLASS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
-            String sql2 = "CREATE IF NOT EXIST CLASS watch_traj (trajectory_id int,user_id char, trajectory char);";
+            String sql1 = "CREATE CLASS IF NOT EXISTS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
+            String sql2 = "CREATE CLASS IF NOT EXISTS watch_traj (trajectory_id int,user_id char, trajectory char);";
             Create create = new CreateImpl(memConnect);
             Statement parse1 = CCJSqlParserUtil.parse(sql1);
             Statement parse2 = CCJSqlParserUtil.parse(sql2);
@@ -59,9 +59,9 @@ public class TrajectoryUtils {
         // 构造SQL语句
         String sql;
         if(tID % 2 == 1){
-            sql = String.format("INSERT INTO mobile_phone_traj VALUES (%d,%s,%s);", tID, uID, tString);
+            sql = String.format("INSERT INTO mobile_phone_traj VALUES (%d,'%s','%s');", tID, uID, tString);
         }else{
-            sql = String.format("INSERT INTO watch_traj VALUES (%d,%s,%s);", tID, uID, tString);
+            sql = String.format("INSERT INTO watch_traj VALUES (%d,'%s','%s');", tID, uID, tString);
         }
 
         // 执行SQl语句
