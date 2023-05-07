@@ -3,7 +3,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
         applicationId "drz.tmdb"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"

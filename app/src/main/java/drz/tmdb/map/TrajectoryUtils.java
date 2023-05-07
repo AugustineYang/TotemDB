@@ -35,8 +35,8 @@ public class TrajectoryUtils {
     // 初始化两张轨迹表
     public void init(){
         try{
-            String sql1 = "CREATE CLASS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
-            String sql2 = "CREATE CLASS watch_traj (trajectory_id int,user_id char, trajectory char);";
+            String sql1 = "CREATE IF NOT EXIST CLASS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
+            String sql2 = "CREATE IF NOT EXIST CLASS watch_traj (trajectory_id int,user_id char, trajectory char);";
             Create create = new CreateImpl(memConnect);
             Statement parse1 = CCJSqlParserUtil.parse(sql1);
             Statement parse2 = CCJSqlParserUtil.parse(sql2);
