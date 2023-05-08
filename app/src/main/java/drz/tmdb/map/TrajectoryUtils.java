@@ -11,6 +11,10 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+import drz.tmdb.Transaction.Transactions.CreateDeputyClass;
+import drz.tmdb.Transaction.Transactions.CreateTJoinDeputyClass;
+import drz.tmdb.Transaction.Transactions.impl.CreateDeputyClassImpl;
+import drz.tmdb.Transaction.Transactions.impl.CreateTJoinDeputyClassImpl;
 import drz.tmdb.memory.Tuple;
 import drz.tmdb.Transaction.Transactions.Create;
 import drz.tmdb.Transaction.Transactions.Insert;
@@ -27,7 +31,6 @@ public class TrajectoryUtils {
 
     public TrajectoryUtils(MemConnect memConnect){
         this.memConnect = memConnect;
-
         // 初始化两张轨迹表
         init();
     }
@@ -37,11 +40,15 @@ public class TrajectoryUtils {
         try{
             String sql1 = "CREATE CLASS IF NOT EXISTS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
             String sql2 = "CREATE CLASS IF NOT EXISTS watch_traj (trajectory_id int,user_id char, trajectory char);";
+            String sql3 = "CREATE TJOINDEPUTYCLASS join_traj as select * from mobile_phone_traj, watch_traj";
             Create create = new CreateImpl(memConnect);
+            CreateTJoinDeputyClass createtjoin = new CreateTJoinDeputyClassImpl(memConnect);
             Statement parse1 = CCJSqlParserUtil.parse(sql1);
             Statement parse2 = CCJSqlParserUtil.parse(sql2);
+            Statement parse3 = CCJSqlParserUtil.parse(sql3);
             create.create(parse1);
             create.create(parse2);
+            createtjoin.createTJoinDeputyClass(parse3);
         }catch (Exception e){
             e.printStackTrace();
         }
