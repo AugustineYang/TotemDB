@@ -76,21 +76,25 @@ public class TrajectoryUtils {
     }
 
     // 读取历史轨迹数据，每条轨迹是若干个轨迹点组成的ArrayList
-    public static ArrayList<ArrayList<TrajectoryPoint>> load(){
-        ArrayList<ArrayList<TrajectoryPoint>> ret = new ArrayList<ArrayList<TrajectoryPoint>>();
+    public static ArrayList<ArrayList<TrajectoryPoint>> load(boolean mobile, boolean watch){
+        ArrayList<ArrayList<TrajectoryPoint>> ret = new ArrayList<>();
         String sql1 = "SELECT * FROM mobile_phone_traj;";
         String sql2 = "SELECT * FROM watch_traj;";
         try{
             Select select = new SelectImpl(memConnect);
-            Statement parse1 = CCJSqlParserUtil.parse(sql1);
-            SelectResult result1 = select.select(parse1);
-            Statement parse2 = CCJSqlParserUtil.parse(sql2);
-            SelectResult result2 = select.select(parse2);
-            for(Tuple t: result1.getTpl().tuplelist){
-                ret.add(deserialize((String) t.tuple[2]));
+            if (mobile) {
+                Statement parse1 = CCJSqlParserUtil.parse(sql1);
+                SelectResult result1 = select.select(parse1);
+                for(Tuple t: result1.getTpl().tuplelist){
+                    ret.add(deserialize((String) t.tuple[2]));
+                }
             }
-            for(Tuple t: result2.getTpl().tuplelist){
-                ret.add(deserialize((String) t.tuple[2]));
+            if (watch) {
+                Statement parse2 = CCJSqlParserUtil.parse(sql2);
+                SelectResult result2 = select.select(parse2);
+                for(Tuple t: result2.getTpl().tuplelist){
+                    ret.add(deserialize((String) t.tuple[2]));
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -150,7 +154,7 @@ public class TrajectoryUtils {
     // 将String反序列化成轨迹
     public static ArrayList<TrajectoryPoint> deserialize(String str){
         ArrayList<TrajectoryPoint> ret = new ArrayList<>();
-        String[] info = str.split("-");
+        String[] info = str.replace("'", "").split("-");
         int pointCount = info.length / 2;
         for(int i=0; i<pointCount; i++){
             ret.add(new TrajectoryPoint(Double.parseDouble(info[i]), Double.parseDouble(info[i+1])));
