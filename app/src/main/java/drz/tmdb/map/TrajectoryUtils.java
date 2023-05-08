@@ -83,10 +83,11 @@ public class TrajectoryUtils {
     }
 
     // 读取历史轨迹数据，每条轨迹是若干个轨迹点组成的ArrayList
-    public static ArrayList<ArrayList<TrajectoryPoint>> load(boolean mobile, boolean watch){
+    public static ArrayList<ArrayList<TrajectoryPoint>> load(boolean mobile, boolean watch, boolean join){
         ArrayList<ArrayList<TrajectoryPoint>> ret = new ArrayList<>();
         String sql1 = "SELECT * FROM mobile_phone_traj;";
         String sql2 = "SELECT * FROM watch_traj;";
+        String sql3 = "SELECT * FROM join_traj";
         try{
             Select select = new SelectImpl(memConnect);
             if (mobile) {
@@ -103,7 +104,14 @@ public class TrajectoryUtils {
                     ret.add(deserialize((String) t.tuple[2]));
                 }
             }
-        }catch (Exception e){
+            if (join) {
+                Statement parse3 = CCJSqlParserUtil.parse(sql3);
+                SelectResult result3 = select.select(parse3);
+                for(Tuple t: result3.getTpl().tuplelist){
+                    ret.add(deserialize((String) t.tuple[2]));
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ret;

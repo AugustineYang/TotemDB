@@ -97,7 +97,7 @@ public class MapActivity extends Activity implements LocationSource,
     // 2号设备产生的轨迹使用蓝色点
     private void drawTrace(){
         // 读取历史轨迹数据
-        ArrayList<ArrayList<TrajectoryPoint>> mobileTrajectories = TrajectoryUtils.load(true, false);
+        ArrayList<ArrayList<TrajectoryPoint>> mobileTrajectories = TrajectoryUtils.load(true, false, false);
         for (ArrayList<TrajectoryPoint> trajectory : mobileTrajectories){
             for (TrajectoryPoint point : trajectory) {
                 // 绘制每个点
@@ -106,12 +106,19 @@ public class MapActivity extends Activity implements LocationSource,
             }
         }
 
-        ArrayList<ArrayList<TrajectoryPoint>> watchTrajectories = TrajectoryUtils.load(false, true);
+        ArrayList<ArrayList<TrajectoryPoint>> watchTrajectories = TrajectoryUtils.load(false, true, false);
         for (ArrayList<TrajectoryPoint> trajectory : watchTrajectories){
             for (TrajectoryPoint point : trajectory) {
-                // 绘制每个点
                 LatLng latLng = new LatLng(point.latitude, point.longitude);
                 aMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(colorIcon[0])));
+            }
+        }
+
+        ArrayList<ArrayList<TrajectoryPoint>> joinTrajectories = TrajectoryUtils.load(false, false, true);
+        for (ArrayList<TrajectoryPoint> trajectory : joinTrajectories){
+            for (TrajectoryPoint point : trajectory) {
+                LatLng latLng = new LatLng(point.latitude, point.longitude);
+                aMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(colorIcon[6])));
             }
         }
     }
