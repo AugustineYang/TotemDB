@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //import drz.tmdb.Level.LevelManager;
+import drz.tmdb.Transaction.Transactions.CreateTJoinDeputyClass;
+import drz.tmdb.Transaction.Transactions.impl.CreateTJoinDeputyClassImpl;
 import drz.tmdb.level.LevelManager;
 import drz.tmdb.Log.*;
 import drz.tmdb.memory.*;
@@ -221,6 +223,12 @@ public class TransAction {
  //                   log.WriteLog(id,k,op,s);
                     CreateDeputyClass createDeputyClass=new CreateDeputyClassImpl(memConnect);
                     if(createDeputyClass.createDeputyClass(stmt)) {
+                        new AlertDialog.Builder(context).setTitle("提示").setMessage("创建成功").setPositiveButton("确定",null).show();
+                    }
+                    break;
+                case "CreateTJoinDeputyClass":
+                    CreateTJoinDeputyClass createTJoinDeputyClass=new CreateTJoinDeputyClassImpl(memConnect);
+                    if(createTJoinDeputyClass.createTJoinDeputyClass(stmt)) {
                         new AlertDialog.Builder(context).setTitle("提示").setMessage("创建成功").setPositiveButton("确定",null).show();
                     }
                     break;
