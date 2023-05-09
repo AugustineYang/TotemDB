@@ -16,7 +16,7 @@ public class TrajTrans {
     }
 
     static List<Coordinate> getTraj(String s){
-        String[] rightSplit= s.split("-");
+        String[] rightSplit= s.replace("'", "").split("-");
         List<Coordinate> Traj=new ArrayList<>();
         for (int k = 0; k < rightSplit.length; k+=2) {
             Coordinate coordinate = new Coordinate(Double.parseDouble(rightSplit[k]), Double.parseDouble(rightSplit[k + 1]));
