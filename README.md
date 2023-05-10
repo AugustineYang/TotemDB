@@ -14,7 +14,7 @@ Totem Mobile Database at WHU.
 &emsp;
 
 ## Contributors
-AugustineYang, RubbishZhYic, illusoryw, GS9005, Qingzheng-Wang, OrionM42M31
+AugustineYang, ZhongYic00, illusoryw, GS9005, Qingzheng-Wang, OrionM42M31
 
 &emsp;
 
