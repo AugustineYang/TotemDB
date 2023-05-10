@@ -9,7 +9,7 @@ import java.util.List;
 public class LongestCommonSubSequence {
     static Comparator<Coordinate> comparator = (p1, p2) -> {
         double dist = Geo.distance(p1, p2);
-        if (dist <= 50) return 0;
+        if (dist <= 10) return 0;
         return 1;
     };
     public List<Coordinate> getCommonSubsequence(List<Coordinate> firstTrajectory, List<Coordinate> secondTrajectory, int theta) {

@@ -148,7 +148,7 @@ public class InsertImpl implements Insert {
                     //通过TrajTrans.getTraj方法将当前元祖的轨迹部分转化为List<Coordinate> traj2进行后续操作
                     List<Coordinate> traj2 = TrajTrans.getTraj((String) tuple2.tuple[2]);
                     //通过longestCommonSubSequence.getCommonSubsequence获取当前两个traj的公共子序列
-                    List<Coordinate> commonSubsequence = longestCommonSubSequence.getCommonSubsequence(traj1, traj2, 3);
+                    List<Coordinate> commonSubsequence = longestCommonSubSequence.getCommonSubsequence(traj1, traj2, 500);
                     //如果子序列长度大于阈值，则需要在代理类中插入新的tuple 
                     if(commonSubsequence.size()>=1) {
                         //新建临时tuple，这个tuple就是要往代理类中进行插入的tuple
@@ -156,7 +156,7 @@ public class InsertImpl implements Insert {
                         Tuple temp1=new Tuple();
                         temp1.tupleId=tuple.tupleId;
                         temp1.tupleIds=tuple.tupleIds;
-                        temp1.tuple=tuple.tuple;
+                        temp1.tuple=tuple.tuple.clone();
                         //需要将得到的轨迹子序列，转换成string的形式，然后将tuple中轨迹部分设置为转换后的值
                         String temps=TrajTrans.getString(commonSubsequence);
                         temp1.tuple[2]=temps;

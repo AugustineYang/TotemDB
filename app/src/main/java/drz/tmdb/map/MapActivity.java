@@ -102,7 +102,6 @@ public class MapActivity extends Activity implements LocationSource,
     private void drawTrace(){
         aMap.clear();
         mLocMarker = null;
-        mFirstFix = false;
 
         if (mDisplayJoinTrajectory) {
             ArrayList<ArrayList<TrajectoryPoint>> joinTrajectories = TrajectoryUtils.load(false, false, true);
@@ -141,6 +140,7 @@ public class MapActivity extends Activity implements LocationSource,
             aMap = mapView.getMap();
             setUpMap();
         }
+        mFirstFix = false;
         mSensorHelper = new SensorEventHelper(this);
         if (mSensorHelper != null) {
             mSensorHelper.registerSensorListener();
