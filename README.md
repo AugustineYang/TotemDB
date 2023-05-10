@@ -10,17 +10,24 @@ Totem Mobile Database at WHU.
 
 This is a prototype system for teaching purpose.
 
+Contributers:
+AugustineYang, RubbishZhYic, illusoryw, GS9005, Qingzheng-Wang, OrionM42M31
+
 ### Task 1
 
 设计系统表，并实现系统表的读取和保存。
 
 ### Task 2
 
-实现对象Join操作。
+添加对轨迹Join代理类的SQL语句解析支持。
 
 ### Task 3
 
-实现更新迁移、跨类查询； 实现手机端轨迹数据的join操作并进行可视化。
+实现轨迹数据的join操作。
+
+### Task 4
+
+实现轨迹的可视化。
 
 ## 参考资料
 
