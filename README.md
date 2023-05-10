@@ -10,7 +10,8 @@ Totem Mobile Database at WHU.
 
 This is a prototype system for teaching purpose.
 
-Contributers:
+Contributors:
+
 AugustineYang, RubbishZhYic, illusoryw, GS9005, Qingzheng-Wang, OrionM42M31
 
 ### Task 1
